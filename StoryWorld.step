@@ -1,0 +1,42 @@
+[main]
+MakeStoryWorld:
+    [DefineProblem "StoryLogic"]
+    [DefinePredicate "Likes" ?_entity]
+    [DefinePredicate "Dead" ?_who]
+    [DefinePredicate "Exists" ?_entity]
+    [AtMost StoryLogic 1 simple_tastes posh_tastes]
+[end]
+
+[fallible]
+ConsistentWith ?props:
+    #[ResetAssumptions StoryLogic]
+    [MakeStoryWorld]
+    [Implies [KnownTruths ?p]
+             [Assume StoryLogic ?p]]
+    [Implies [?props ?prop]
+             [Assume StoryLogic ?prop]]
+    [SolveOnce StoryLogic ?]
+[end]
+
+[fallible]
+ConsistentWithBoth ?props1 ?props2:
+    #[ResetAssumptions StoryLogic]
+    [MakeStoryWorld]
+    [Implies [KnownTruths ?p]
+             [Assume StoryLogic ?p]]
+    [Implies [?props1 ?prop1]
+             [Assume StoryLogic ?prop1]]
+    [Implies [?props2 ?prop2]
+             [Assume StoryLogic ?prop2]]
+    [SolveOnce StoryLogic ?]
+[end]
+
+AddTruths ?facts: [ForEach [?facts ?fact] [AddTruth ?fact]]
+AddTruth ?fact: [add ?fact KnownTruths]
+
+[main]
+RestartStory:
+    [set KnownTruths = Empty]
+[end]
+
+initially: [MakeStoryWorld] [RestartStory]

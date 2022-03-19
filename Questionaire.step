@@ -1,0 +1,5 @@
+Question drink []: What'll you have to drink?
+Answer drink [[Likes alcohol] simple_tastes]: Whiskey, on the rocks.
+Answer drink [posh_tastes]: A bottle of spring water, please.
+Answer drink [health_oriented [Likes sweets]]: A diet coke; I'm trying to watch my weight.
+Answer drink [[Likes sweets]]: An ice-cold bottle of orange juice.  I'm parched.

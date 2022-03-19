@@ -1,0 +1,17 @@
+[randomly] predicate Question ?name ?implications.
+predicate Answer ?name ?implications.
+
+ShowQuestion:
+    [Write KnownTruths][Paragraph]
+    <b>Q: [Question ?q ?implications]</b>
+    [ConsistentWith ?implications]
+    [Paragraph]
+    [DoAll [Write *] [Answer ?q ?aImplications] [ConsistentWithBoth ?implications ?aImplications]
+           [Link [ChooseAnswer ?implications ?aImplications]] [Write "<i>Select</i>"] [EndLink] [NewLine]]
+[end]
+
+ChooseAnswer ?implications ?aImplications:
+    [AddTruths ?implications]
+    [AddTruths ?aImplications]
+    [ShowQuestion]
+[end]
